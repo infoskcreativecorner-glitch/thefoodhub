@@ -2472,11 +2472,25 @@ footer {
     width: 260px;
     height: 260px;
   }
-  /* Hide only hero floating cards, NOT form cards */
+  /* Show hero floating cards in mobile view, scaled down to fit */
   .fcard.fc1,
   .fcard.fc2,
   .fcard.fc3 {
-    display: none !important;
+    display: flex !important;
+    transform: scale(0.7) !important;
+    transform-origin: center;
+  }
+  .fcard.fc1 {
+    top: 15px !important;
+    left: -20px !important;
+  }
+  .fcard.fc2 {
+    bottom: 25px !important;
+    right: -30px !important;
+  }
+  .fcard.fc3 {
+    top: 35% !important;
+    right: -45px !important;
   }
   .hstats {
     display: none !important;
