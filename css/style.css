@@ -14,14 +14,16 @@
   padding: 0;
   box-sizing: border-box;
 }
-html {
+html,
+body {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
 }
 body {
   font-family: "Poppins", sans-serif;
   color: #444;
   background: #fff;
-  overflow-x: hidden;
 }
 h1,
 h2,
@@ -51,6 +53,7 @@ img {
   background: #111;
   padding: 8px 0;
   font-size: 0.82rem;
+  overflow: hidden;
 }
 #topbar span {
   color: #aaa;
@@ -193,6 +196,7 @@ img {
 /* ===================== SECTION COMMONS ===================== */
 section {
   padding: 88px 0;
+  overflow-x: hidden;
 }
 .slbl {
   font-family: "Dancing Script", cursive;
@@ -536,20 +540,20 @@ section {
 @keyframes cardPop {
   from {
     opacity: 0;
-    transform: scale(0.7) translateY(20px);
+    transform: scale(calc(var(--fcard-scale, 1) * 0.7)) translateY(20px);
   }
   to {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: scale(var(--fcard-scale, 1)) translateY(0);
   }
 }
 @keyframes fltc {
   0%,
   100% {
-    transform: translateY(0);
+    transform: scale(var(--fcard-scale, 1)) translateY(0);
   }
   50% {
-    transform: translateY(-9px);
+    transform: scale(var(--fcard-scale, 1)) translateY(-9px);
   }
 }
 .fcoi {
@@ -1777,8 +1781,9 @@ section {
 
 /* ===================== FOOTER ===================== */
 footer {
-  background: var(--dark);
+  background: #252729; /* Slightly gray premium highlight */
   padding: 68px 0 0;
+  overflow: hidden;
 }
 .fnm {
   font-family: "Playfair Display", serif;
@@ -2405,6 +2410,34 @@ footer {
 
 /* ===================== RESPONSIVE ===================== */
 @media (max-width: 991px) {
+  /* Navbar mobile collapse enhancement */
+  .navbar-collapse {
+    background: #fff;
+    padding: 12px 16px 20px 16px;
+    border-radius: 14px;
+    margin-top: 8px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  }
+  .navbar-nav .nav-link {
+    padding: 10px 15px !important;
+    text-align: center;
+    border-radius: 8px;
+  }
+  .navbar-nav .nav-link:hover,
+  .navbar-nav .nav-link.active {
+    background: rgba(232, 40, 26, 0.05);
+  }
+  .navbar-nav .nav-link::after {
+    display: none !important;
+  }
+  .navbar-collapse .d-flex {
+    justify-content: center;
+    margin-top: 12px;
+  }
+  .nav-cta {
+    margin-left: 0 !important;
+  }
+
   .hcircle {
     width: 320px;
     height: 320px;
@@ -2473,24 +2506,23 @@ footer {
     height: 260px;
   }
   /* Show hero floating cards in mobile view, scaled down to fit */
-  .fcard.fc1,
-  .fcard.fc2,
-  .fcard.fc3 {
+  #hero .fcard {
     display: flex !important;
-    transform: scale(0.7) !important;
+    --fcard-scale: 0.68;
     transform-origin: center;
+    padding: 10px 15px !important; /* Keep floating cards compact */
   }
   .fcard.fc1 {
     top: 15px !important;
-    left: -20px !important;
+    left: -15px !important;
   }
   .fcard.fc2 {
     bottom: 25px !important;
-    right: -30px !important;
+    right: -15px !important;
   }
   .fcard.fc3 {
     top: 35% !important;
-    right: -45px !important;
+    right: -30px !important;
   }
   .hstats {
     display: none !important;
@@ -2514,15 +2546,43 @@ footer {
     width: 100%;
     border-radius: 12px;
   }
-  .fcard {
+  /* Only apply larger padding to static layout cards, not hero cards */
+  .fcard:not(#hero .fcard) {
     padding: 22px 18px;
   }
 }
 
 @media (max-width: 480px) {
+  .bico {
+    width: 38px;
+    height: 38px;
+    font-size: 1.1rem;
+  }
+  .bname {
+    font-size: 1.25rem;
+  }
+  .bsub {
+    font-size: 0.58rem;
+    letter-spacing: 1px;
+  }
   .hcircle {
     width: 220px;
     height: 220px;
+  }
+  #hero .fcard {
+    --fcard-scale: 0.62;
+  }
+  .fcard.fc1 {
+    top: 10px !important;
+    left: -20px !important;
+  }
+  .fcard.fc2 {
+    bottom: 20px !important;
+    right: -25px !important;
+  }
+  .fcard.fc3 {
+    top: 35% !important;
+    right: -35px !important;
   }
   .htitle {
     font-size: 2.4rem;
