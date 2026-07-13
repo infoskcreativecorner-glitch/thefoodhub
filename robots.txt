@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://infoskcreativecorner-glitch.github.io/thefoodhub/sitemap.xml
